@@ -1,12 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+
+import store from './store';
+import WelcomeScreen from './screens/WelcomeScreen';
 
 export default class App extends React.Component {
   render() {
+		const MainNavigator = createBottomTabNavigator({
+			welcomeScreen: { screen: WelcomeScreen }
+		}, {
+			navigationOptions: {
+				tabBarVisible: false
+			},
+			animationsAreEnabled: false
+		});
+
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+        <Provider store={store}>
+            <MainNavigator style={styles.container} />
+        </Provider>
     );
   }
 }
