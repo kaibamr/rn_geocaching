@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 class Slides extends Component {
@@ -8,10 +8,17 @@ class Slides extends Component {
 		if (index === this.props.data.length - 1) {
 			return (
 				<Button
-					title="Dawaj Andrzej!"
-					raised
-					containerViewStyle={styles.buttonStyle}
+					title="Gotów!"
 					onPress={this.props.onComplete}
+					buttonStyle={styles.buttonStyle}
+					iconLeft
+					icon={
+						<Icon
+							name='location-on'
+							size={15}
+							color='white'
+						/>
+					}
 				/>
 			);
 		}
@@ -59,7 +66,8 @@ const styles = {
 	},
 	buttonStyle: {
 		backgroundColor: '#0288D1',
-		marginTop: 15,
+		marginTop: 50,
+		borderRadius: 5,
 		width: 150
 	}
 };

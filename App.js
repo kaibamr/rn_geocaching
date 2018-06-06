@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 
 import store from './store';
 import WelcomeScreen from './screens/WelcomeScreen';
-import AchievementsScreen from "./screens/AchievementsScreen";
-import RiddlesScreen from "./screens/RiddlesScreen";
-import ResumeScreen from "./screens/ResumeScreen";
-import NewsScreen from "./screens/NewsScreen";
-import AuthScreen from "./screens/AuthScreen";
+import AchievementsScreen from './screens/AchievementsScreen';
+import RiddlesScreen from './screens/RiddlesScreen';
+import ResumeScreen from './screens/ResumeScreen';
+import NewsScreen from './screens/NewsScreen';
+import AuthScreen from './screens/AuthScreen';
 
 export default class App extends React.Component {
   render() {
