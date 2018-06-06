@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
+import { Icon } from 'react-native-elements';
 
 import store from './store';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -11,6 +12,8 @@ import ResumeScreen from './screens/ResumeScreen';
 import NewsScreen from './screens/NewsScreen';
 import AuthScreen from './screens/AuthScreen';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 export default class App extends React.Component {
   render() {
 		const MainNavigator = createBottomTabNavigator({
@@ -18,10 +21,30 @@ export default class App extends React.Component {
 			auth: { screen: AuthScreen },
 			main: {
 				screen: createBottomTabNavigator({
-					news: { screen: NewsScreen },
-					riddles: { screen: RiddlesScreen },
-					resume: { screen: ResumeScreen },
-					achievements: { screen: AchievementsScreen }
+					Resume: { screen: ResumeScreen },					
+					Riddles: { screen: RiddlesScreen },
+					Achievements: { screen: AchievementsScreen },
+					News: { screen: NewsScreen },
+				}, {
+					navigationOptions: ({navigation}) => ({
+						tabBarIcon: ({ focused, tintColor }) => {
+							const { routeName } = navigation.state;
+							let iconName;
+							if (routeName === 'News') {
+								iconName = `ios-paper${focused ? '' : '-outline'}`;
+							} else if (routeName === 'Resume') {
+								iconName = `ios-compass${focused ? '' : '-outline'}`;
+							} else if (routeName === 'Achievements') {
+								iconName = `ios-trophy${focused ? '' : '-outline'}`;
+							} else if (routeName === 'Riddles') {
+								iconName = `ios-bookmarks${focused ? '' : '-outline'}`;
+							}
+			
+							// You can return any component that you like here! We usually use an
+							// icon component from react-native-vector-icons
+							return <Ionicons name={iconName} size={25} color={tintColor} />;
+						},
+					})
 				})
 			}
 		}, {
