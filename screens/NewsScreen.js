@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-
+import { Text, View, AsyncStorage } from 'react-native';
+import { Button } from 'react-native-elements';
 class NewsScreen extends Component {
 	render() {
 		return (
-			<View>
-				<Text>
-					Jakies newsy.. (albo coś innego?)
-				</Text>
+			<View style={{ alignSelf: 'center', justifyContent: 'center', flex: 1}}>
+				<Button title='Wyczyść storage' onPress={()=> { AsyncStorage.setItem('firebase_token', null); }}/>
 			</View>
 		);
 	}
