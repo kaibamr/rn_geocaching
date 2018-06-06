@@ -28,6 +28,7 @@ class AuthScreen extends Component {
 								backgroundColor: '#0288D1',
 								borderRadius: 5
 							}}
+							onPress={() => this.props.navigation.navigate('News')}
 						/>
 					</View>
 				</Card>

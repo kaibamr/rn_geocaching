@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
-	{ text: 'Jakiś opis apki v1', color: '#03A9F4' },
-	{ text: 'Jakiś opis apki v2', color: '#009688' },
-	{ text: 'Jakiś opis apki v3 + logowanie', color: '#03A9F4' },
+	{ text: 'Welcome in GeocachingApp!', color: '#03A9F4' },
+	{ text: 'Want to explore? Just select riddle and go on!', color: '#670CE8' },
+	{ text: 'Create an account and you are ready to go!', color: '#03A9F4' }
 ];
 
 class WelcomeScreen extends Component {

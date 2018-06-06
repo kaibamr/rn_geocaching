@@ -8,7 +8,7 @@ class Slides extends Component {
 		if (index === this.props.data.length - 1) {
 			return (
 				<Button
-					title="Gotów!"
+					title="I'm ready!"
 					onPress={this.props.onComplete}
 					buttonStyle={styles.buttonStyle}
 					iconLeft
@@ -60,7 +60,7 @@ const styles = {
 		width: SCREEN_WIDTH
 	},
 	slideText: {
-		fontSize: 30,
+		fontSize: 24,
 		color: '#FFFF',
 		textAlign: 'center',
 	},
