@@ -13,11 +13,11 @@ class AchievementsScreen extends Component {
 	}
 };
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 	  marginTop: 15,
 	  marginBottom: 15
 	}
-});
+};
 
 export default AchievementsScreen;

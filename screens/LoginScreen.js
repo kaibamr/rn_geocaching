@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AppLoading } from 'expo';
-import {Dimensions, View} from 'react-native';
-import { Button, Card, Input, Icon } from 'react-native-elements';
+import {Dimensions, View, Text} from 'react-native';
+import { Button, Card, Input } from 'react-native-elements';
 import { emailChanged, passwordChanged, loginUser } from '../actions/auth_actions';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-class AuthScreen extends Component {
+class LoginScreen extends Component {
 	onEmailChange(text) {
 		this.props.emailChanged(text);
 	}
@@ -16,8 +15,8 @@ class AuthScreen extends Component {
 		this.props.passwordChanged(text);
 	}
 
-	onRegisterPress() {
-		const { email, password } = this.props.auth;
+	onLoginPress() {
+		const { email, password } = this.props;
 		this.props.loginUser({ email, password });
 	}
 
@@ -26,52 +25,70 @@ class AuthScreen extends Component {
 	}
 
 	onAuthComplete(props) {
-		if (props.token) {
-			this.props.navigation.navigate('news');
+		if (props.email && props.password && props.loggedIn) {
+			this.props.navigation.navigate('News');
 		}
 	}
 
 	renderButton() {
-		if (this.props.loading) {
-			return <AppLoading />
+		console.log(this.props.loading);
+		if	(this.props.loading) {
+			return (
+				<Button
+					loading
+					loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
+					style={{
+						backgroundColor: '#0288D1',
+						borderRadius: 5
+					}}
+				/>
+			);
 		} else {
 			return (
 				<Button
 					iconLeft
 					leftIcon={{ type: 'font-awesome', name: 'map-marker' }}
-					title='Zarejestruj'
+					title='Login'
 					style={{
 						backgroundColor: '#0288D1',
 						borderRadius: 5
 					}}
-					onPress={() => this.onRegisterPress()}
+					onPress={() => this.onLoginPress()}
 				/>
 			);
 		}
 	}
 
+	renderError() {
+		if(this.props.error) {
+			return (
+				<Text>{this.props.error}</Text>
+			);
+		}
+	}
+
 	render() {
-
-
 		return (
 			<View style={styles.container}>
-				{this.renderView()}
-				<Card title="Rejestracja">
+				<Card title="Login to your account">
 					<View>
 						<Input
 							placeholder='Email'
 							leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-							value={this.props.auth.email}
+							value={this.props.email}
 							onChangeText={this.onEmailChange.bind(this)}
 						/>
 						<Input
-							placeholder='Hasło'
+							placeholder='Password'
 							leftIcon={{ type: 'font-awesome', name: 'unlock' }}
-							value={this.props.auth.password}
+							value={this.props.password}
 							onChangeText={this.onPasswordChange.bind(this)}
 						/>
 					</View>
-					<View style={{ marginTop: 50 }}>
+					<View style={{ marginTop: 10}}>
+						{this.renderError()}
+					</View>
+					<View style={{ marginTop: 10 }}>
 						{this.renderButton()}
 					</View>
 				</Card>
@@ -91,10 +108,12 @@ const styles = {
 
 function mapStateToProps({ auth }) {
 	return {
-		token: auth.token,
+		email: auth.email,
+		password: auth.password,
 		loading: auth.loading,
-		auth
+		error: auth.error,
+		loggedIn: auth.loggedIn
 	};
 }
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(AuthScreen);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginScreen);

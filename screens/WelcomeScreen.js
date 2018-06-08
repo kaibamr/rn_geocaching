@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
-import { AppLoading } from 'expo';
-import _ from 'lodash';
+import { connect } from 'react-redux';
 import Slides from '../components/Slides';
+import { loginUser } from '../actions/auth_actions';
 
 const SLIDE_DATA = [
 	{ text: 'Welcome in GeocachingApp!', color: '#03A9F4' },
@@ -12,18 +12,30 @@ const SLIDE_DATA = [
 
 class WelcomeScreen extends Component {
 	state = {
-		token: null
+		email: null,
+		password: null
 	}
 
 	async componentWillMount() {
-		const token = await AsyncStorage.getItem('firebase_token');
-
-		if (token) {
-			this.props.navigation.navigate('news');
-			this.setState({ token });
+		const email = await AsyncStorage.getItem('user_login');
+		const password = await AsyncStorage.getItem('user_password');
+		console.log(email);
+		console.log(password);
+		if (email && password) {
+			this.props.loginUser(email, password);
+			if(this.props.autoLoginFail) {
+				this.props.navigation.navigate('auth');
+			}
+			this.setState({
+				email,
+				password
+			});
+			this.props.navigation.navigate('News');
 		} else {
-			this.setState({ token: false });
-			console.log('brak tokenu');
+			this.setState({
+				email: null,
+				password: null
+			});
 		}
 	}
 
@@ -32,10 +44,6 @@ class WelcomeScreen extends Component {
 	}
 
 	render() {
-		if (_.isNull(this.state.token)) {
-			return <AppLoading />
-		}
-
 		return (
 			<Slides
 				data={SLIDE_DATA}
@@ -45,4 +53,10 @@ class WelcomeScreen extends Component {
 	}
 }
 
-export default WelcomeScreen;
+function mapStateToProps({ auth }) {
+	return {
+		autoLoginFail: auth.autoLoginFail
+	};
+}
+
+export default connect(mapStateToProps, { loginUser })(WelcomeScreen);

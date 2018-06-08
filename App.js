@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
-import { Icon } from 'react-native-elements';
 
 import firebase from 'firebase';
 import store from './store';
@@ -11,11 +10,20 @@ import AchievementsScreen from './screens/AchievementsScreen';
 import RiddlesScreen from './screens/RiddlesScreen';
 import ResumeScreen from './screens/ResumeScreen';
 import NewsScreen from './screens/NewsScreen';
-import AuthScreen from './screens/AuthScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import LoginScreen from './screens/LoginScreen';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class App extends React.Component {
+	constructor() {
+		super();
+
+		// NOTE: due to FIREBASE LOGIN
+		console.ignoredYellowBox = [
+			'Setting a timer'
+		];
+	}
 	componentWillMount() {
 		const config = {
 			apiKey: "AIzaSyA141XWwqK4dgqhMcOaM_QX71wcwZVlKMs",
@@ -34,7 +42,10 @@ export default class App extends React.Component {
   render() {
 		const MainNavigator = createBottomTabNavigator({
 			welcome: { screen: WelcomeScreen },
-			auth: { screen: AuthScreen },
+			auth: createBottomTabNavigator({
+				Register: { screen: RegisterScreen },
+				Login: { screen: LoginScreen }
+			}),
 			main: {
 				screen: createBottomTabNavigator({
 					Resume: { screen: ResumeScreen },					
