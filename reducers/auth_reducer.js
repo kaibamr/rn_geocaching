@@ -25,12 +25,6 @@ export default function(state = default_state, action) {
 		case PASSWORD_CHANGED:
 			return { ...state, password: action.payload, error: null };
 		case FIREBASE_LOGIN_SUCCESS:
-			console.log({
-				email: action.payload.email,
-				password: action.payload.password,
-				loggedIn: true,
-				uid: action.payload.uid
-			});
 			return {
 				email: action.payload.email,
 				password: action.payload.password,

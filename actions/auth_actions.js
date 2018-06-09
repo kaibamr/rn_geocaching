@@ -12,7 +12,6 @@ import {
 
 
 export const emailChanged = (value) => {
-	console.log(value);
 	return {
 		type: EMAIL_CHANGED,
 		payload: value

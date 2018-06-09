@@ -31,7 +31,6 @@ class RegisterScreen extends Component {
 	}
 
 	renderButton() {
-		console.log(this.props.loading);
 		if	(this.props.loading) {
 			return (
 				<Button
