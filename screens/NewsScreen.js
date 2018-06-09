@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
 class NewsScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text>
-					Jakies newsy.. (albo coś innego?)
-				</Text>
+					<Text>Newsy</Text>
 			</View>
 		);
 	}
 };
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 	  marginTop: 15,
 	  marginBottom: 15
 	}
-});
+};
 
-export default NewsScreen;
+export default connect()(NewsScreen);
