@@ -12,15 +12,14 @@ class NewsScreen extends Component {
 
 	componentWillMount() {
 		this.props.getNews();
-	}
-
-	renderNews() {
 		setTimeout(() => {
 			this.setState({
 				loading: this.props.loading
 			});
 		}, 2500);
+	}
 
+	renderNews() {
 		const news = _.values(this.props.news);
 		return news.map((item) => {
 			return (
@@ -37,16 +36,16 @@ class NewsScreen extends Component {
 		if (this.state.loading) {
 			return (
 				<View style={styles.spinner}>
-					<ActivityIndicator size="large" color="#0288D1" />
-				</View>
-			);
-		} else {
-			return (
-				<View style={styles.container}>
-					{this.renderNews()}
+					<ActivityIndicator size="large" color="#0288D1"/>
 				</View>
 			);
 		}
+
+		return (
+			<View style={styles.container}>
+				{this.renderNews()}
+			</View>
+		);
 	}
 };
 
