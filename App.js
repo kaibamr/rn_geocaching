@@ -45,6 +45,20 @@ export default class App extends React.Component {
 			auth: createBottomTabNavigator({
 				Register: { screen: RegisterScreen },
 				Login: { screen: LoginScreen }
+			}, {
+				navigationOptions: ({navigation}) => ({
+					tabBarIcon: ({ focused, tintColor }) => {
+						const { routeName } = navigation.state;
+						let iconName;
+
+						if (routeName === "Register") {
+							iconName = `ios-person-add${focused ? '' : '-outline'}`;
+						} else if (routeName === "Login") {
+							iconName = `ios-person${focused ? '' : '-outline'}`;
+						}
+						return <Ionicons name={iconName} size={25} color={tintColor} />;
+					}
+				})
 			}),
 			main: {
 				screen: createBottomTabNavigator({
