@@ -11,3 +11,11 @@ export const AUTO_LOGIN_USER_FAIL = 'auto_login_user_fail';
 export const GET_NEWS_START = 'get_news_start';
 export const GET_NEWS_COMPLETED = 'get_news_completed';
 export const GET_NEWS_LOADED = 'get_news_loaded';
+
+//riddles actions
+export const GET_RIDDLES = 'get_riddles';
+export const GET_CURRENT_RIDDLE = 'get_current_riddle';
+export const GET_RIDDLES_SUCCESS = 'get_riddles_success';
+export const SET_CURRENT_RIDDLE = 'set_current_riddle';
+export const GET_COMPLETED = 'get_completed';
+export const GET_CURRENT_STEP = 'get_current_step';
