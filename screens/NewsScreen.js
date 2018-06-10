@@ -6,8 +6,17 @@ import { Card } from 'react-native-elements';
 import _ from 'lodash';
 
 class NewsScreen extends Component {
+	state = {
+		loading: true
+	}
+
 	componentWillMount() {
 		this.props.getNews();
+		setTimeout(() => {
+			this.setState({
+				loading: this.props.loading
+			});
+		}, 2500);
 	}
 
 	renderNews() {
@@ -24,9 +33,11 @@ class NewsScreen extends Component {
 	}
 
 	render() {
-		if (this.props.loading) {
+		if (this.state.loading) {
 			return (
-				<ActivityIndicator size="large" color="#0288D1"/>
+				<View style={styles.spinner}>
+					<ActivityIndicator size="large" color="#0288D1"/>
+				</View>
 			);
 		}
 
@@ -42,6 +53,11 @@ const styles = {
 	container: {
 	  marginTop: 15,
 	  marginBottom: 15
+	},
+	spinner: {
+		flex: 1,
+		justifyContent: 'center',
+		alignSelf: 'center'
 	}
 };
 

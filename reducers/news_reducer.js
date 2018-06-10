@@ -17,6 +17,7 @@ export default function(state = default_state, action) {
 			return {
 				...state,
 				news: action.payload,
+				loading: false
 			}
 		case GET_NEWS_LOADED:
 			return {

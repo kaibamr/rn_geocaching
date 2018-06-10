@@ -13,7 +13,8 @@ const SLIDE_DATA = [
 class WelcomeScreen extends Component {
 	state = {
 		email: null,
-		password: null
+		password: null,
+		loading: true
 	}
 
 	async componentWillMount() {
@@ -27,13 +28,15 @@ class WelcomeScreen extends Component {
 			}
 			this.setState({
 				email,
-				password
+				password,
+				loading: this.props.loading
 			});
 			this.props.navigation.navigate('News');
 		} else {
 			this.setState({
 				email: null,
-				password: null
+				password: null,
+				loading: false
 			});
 		}
 	}
@@ -43,9 +46,9 @@ class WelcomeScreen extends Component {
 	}
 
 	render() {
-		if (this.props.loading) {
+		if (this.state.loading) {
 			return (
-				<ActivityIndicator size="large" color="#0288D1" />
+				<ActivityIndicator size="large" color="#0288D1" style={styles.spinner}/>
 			);
 		}
 
@@ -64,5 +67,14 @@ function mapStateToProps({ auth }) {
 		loading: auth.loading
 	};
 }
+
+const styles = {
+	spinner: {
+		flex: 1,
+		justifyContent: 'center',
+		alignSelf: 'center'
+	}
+};
+
 
 export default connect(mapStateToProps, { loginUser })(WelcomeScreen);
