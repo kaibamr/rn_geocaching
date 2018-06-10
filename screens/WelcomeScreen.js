@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import Slides from '../components/Slides';
 import { loginUser } from '../actions/auth_actions';
@@ -43,6 +43,12 @@ class WelcomeScreen extends Component {
 	}
 
 	render() {
+		if (this.props.loading) {
+			return (
+				<ActivityIndicator size="large" color="#0288D1" />
+			);
+		}
+
 		return (
 			<Slides
 				data={SLIDE_DATA}
@@ -54,7 +60,8 @@ class WelcomeScreen extends Component {
 
 function mapStateToProps({ auth }) {
 	return {
-		autoLoginFail: auth.autoLoginFail
+		autoLoginFail: auth.autoLoginFail,
+		loading: auth.loading
 	};
 }
 
