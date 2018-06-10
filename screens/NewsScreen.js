@@ -12,32 +12,33 @@ class NewsScreen extends Component {
 
 	componentWillMount() {
 		this.props.getNews();
+	}
+
+	renderNews() {
 		setTimeout(() => {
 			this.setState({
 				loading: this.props.loading
 			});
 		}, 2500);
-	}
 
-	renderNews() {
-		setTimeout(() => {
-			const news = _.values(this.props.news);
-			return news.map((item) => {
-				return (
-					<Card title={item.title} key={item.id}>
-						<Text>
-							{item.description}
-						</Text>
-					</Card>
-				);
-			});
-		}, 300);
+		const news = _.values(this.props.news);
+		return news.map((item) => {
+			return (
+				<Card title={item.title} key={item.id}>
+					<Text>
+						{item.description}
+					</Text>
+				</Card>
+			);
+		});
 	}
 
 	render() {
-		if (this.loading) {
+		if (this.state.loading) {
 			return (
-				<ActivityIndicator size="large" color="#0288D1" style={styles.spinner}/>
+				<View style={styles.spinner}>
+					<ActivityIndicator size="large" color="#0288D1" />
+				</View>
 			);
 		} else {
 			return (
@@ -46,10 +47,6 @@ class NewsScreen extends Component {
 				</View>
 			);
 		}
-
-		return (
-			<ActivityIndicator size="large" color="#0288D1" style={styles.spinner}/>
-		);
 	}
 };
 

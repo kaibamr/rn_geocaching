@@ -14,7 +14,7 @@ export const getNews = () => {
 		firebase.database().ref('/news').on('value', snapshot => {
 			dispatch({
 				type: GET_NEWS_COMPLETED,
-				payload: snapshot.val()
+				payload: snapshot.val(),
 			});
 		});
 		dispatch({

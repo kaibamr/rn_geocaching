@@ -36,7 +36,7 @@ class WelcomeScreen extends Component {
 			this.setState({
 				email: null,
 				password: null,
-				loading: this.props.loading
+				loading: false
 			});
 		}
 	}
