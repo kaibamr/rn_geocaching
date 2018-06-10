@@ -10,8 +10,8 @@ import {
 
 const default_state = {
 	loading: false,
-	email: null,
-	password: null,
+	email: 'wojtek229@o2.pl',
+	password: 'wojtek229',
 	error: null,
 	loggedIn: false,
 	uid: null,
