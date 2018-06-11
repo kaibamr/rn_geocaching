@@ -11,7 +11,7 @@ const INITIAL_STATE = {
     riddles: null,
     currentRiddle: null,
     currentStep: null,
-    completed: null,
+    completedRiddles: null,
     loading: true
 };
 
@@ -26,7 +26,7 @@ export default function (state = INITIAL_STATE, action) {
         case GET_RIDDLES_SUCCESS:
             return { ...state, loading: false };
         case GET_COMPLETED:
-            return { ...state, completed: action.payload };
+            return { ...state, completedRiddles: action.payload };
         default:
             return state;
     }     
