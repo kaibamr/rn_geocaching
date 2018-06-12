@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Constants, MapView, Location, Permissions } from 'expo';
 import { setPosition } from '../actions/geo_actions';
-import { riddlesFetch,  setCurrentStep, setCompleted } from '../actions/riddles_actions';
+import { riddlesFetch,  setCurrentStep, setCompleted, setCurrentRiddle } from '../actions/riddles_actions';
 import riddles from "../reducers/riddles_reducer";
 
 class ResumeScreen extends Component {
@@ -64,20 +64,18 @@ class ResumeScreen extends Component {
 				if (riddle.id == this.props.currentRiddle) {
 					_.map(riddle, (part) => {
 						if (part.id == this.props.currentStep) {
-							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 20) {
-								console.log('jesteś kurwa na miejscu');
+							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 300) {
 								if ((parseInt(this.props.currentStep) + 1) <= riddle.parts) {
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
 								} else {
-									console.log("Zagadka skonczona!");
 									this.props.setCompleted(riddle.id);
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
+									this.props.setCurrentRiddle(0);
 									Alert.alert(
-										'GG WP',
-										'Idi nachuj',
+										'Congratulations',
+										'You have finished riddle',
 										[
-											{text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-											{text: 'OK', onPress: () => console.log('OK Pressed')},
+											{text: 'OK', onPress: () => this.props.navigation.navigate('Riddles')},
 										],
 										{ cancelable: false }
 									);
@@ -96,20 +94,7 @@ class ResumeScreen extends Component {
 		const a = 0.5 - c((lat2 - lat1) * p) / 2 +
 			c(lat1 * p) * c(lat2 * p) *
 			(1 - c((lon2 - lon1) * p)) / 2;
-		console.log('odleglosc ',  12742 * Math.asin(Math.sqrt(a)) * 1000);
 		return (12742 * Math.asin(Math.sqrt(a))) * 1000; // 2 * R; R = 6371 km
-	}
-
-	renderRiddleInfo() {
-		return this.props.riddlesMapped.length !== 0 ? this.props.riddlesMapped.map((riddle) => {
-			if (this.props.currentRiddle == riddle.id) {
-				return (
-					<Text>
-						Current Riddle: {riddle.description}
-					</Text>
-				);
-			}
-		}) : null;
 	}
 
 	render() {
@@ -166,7 +151,7 @@ class ResumeScreen extends Component {
 								</View>
 							);
 						}
-					}) : null // spinner
+					}) : null
 					}
 				</View>
 			</View>
@@ -200,4 +185,4 @@ function mapStateToProps({ geo,  riddles}) {
 	};
 }
 
-export default connect(mapStateToProps, { setPosition, riddlesFetch,  setCurrentStep, setCompleted })(ResumeScreen);
+export default connect(mapStateToProps, { setPosition, riddlesFetch,  setCurrentStep, setCompleted, setCurrentRiddle })(ResumeScreen);
