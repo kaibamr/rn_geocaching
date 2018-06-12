@@ -84,7 +84,8 @@ const registerUserSuccess = (dispatch, user, email, password) => {
 			nickname: email,
 			totalPoints: 0,
 			currentRiddle: 0,
-			currentStep: 1
+			currentStep: 1,
+			completed: ''
 		});
 
 	dispatch({

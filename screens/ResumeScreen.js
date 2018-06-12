@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, CardSection } from 'react-native';
+import { Text, View, StyleSheet, CardSection, Alert  } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Constants, MapView, Location, Permissions } from 'expo';
@@ -54,12 +54,8 @@ class ResumeScreen extends Component {
 				latitude: location.coords.latitude,
 				longitude: location.coords.longitude
 			});
-			// console.log('latitude ', this.props.latitude);
-			// console.log('longitude ', this.props.longitude);
-			// console.log('Dystans: ', (this.distance(this.props.latitude, this.props.longitude, 50.289557, 18.680221) * 1000));
 			this.isInRadius();
 		});
-		// console.log(this.props.riddlesMapped);
 	};
 
 	isInRadius() {
@@ -68,7 +64,7 @@ class ResumeScreen extends Component {
 				if (riddle.id == this.props.currentRiddle) {
 					_.map(riddle, (part) => {
 						if (part.id == this.props.currentStep) {
-							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 300) {
+							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 20) {
 								console.log('jesteś kurwa na miejscu');
 								if ((parseInt(this.props.currentStep) + 1) <= riddle.parts) {
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
@@ -76,9 +72,16 @@ class ResumeScreen extends Component {
 									console.log("Zagadka skonczona!");
 									this.props.setCompleted(riddle.id);
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
+									Alert.alert(
+										'GG WP',
+										'Idi nachuj',
+										[
+											{text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+											{text: 'OK', onPress: () => console.log('OK Pressed')},
+										],
+										{ cancelable: false }
+									);
 								}
-							} else {
-								console.log('nie ma cie kurwa na miejscu');
 							}
 						}
 					});

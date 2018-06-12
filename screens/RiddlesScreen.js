@@ -39,8 +39,8 @@ class RiddlesScreen extends Component {
     }
 	
 	getStep(item) {
-        if (this.props.completed && this.props.completed.length > 0) {
-            let completed = this.props.completed.split(",");
+        if (this.props.completedRiddles && this.props.completedRiddles.length > 0) {
+            let completed = this.props.completedRiddles.split(",");
             // console.log(completed);
             
             if (_.includes(completed, item.id.toString())) {
