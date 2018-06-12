@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, FlatList, List, Image } from 'react-native';
+import { Text, View, StyleSheet, FlatList, List, Image, ActivityIndicator } from 'react-native';
 import { Card, ListItem, Button } from 'react-native-elements';
 import { CardSection } from '../components/common';
 import _ from 'lodash';
@@ -8,8 +8,17 @@ import { connect } from 'react-redux';
 import { riddlesFetch, setCurrentRiddle } from '../actions/riddles_actions';
 
 class RiddlesScreen extends Component {
+	state = {
+		loading: true
+	}
+
 	componentWillMount() {
-        this.props.riddlesFetch();
+		this.props.riddlesFetch();
+		setTimeout(() => {
+			this.setState({
+				loading: this.props.loading
+			});
+		}, 2500);
 	}
 
 	_onPressItem = (id) => {
@@ -68,6 +77,14 @@ class RiddlesScreen extends Component {
     }
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<View style={styles.spinner}>
+					<ActivityIndicator size="large" color="#0288D1"/>
+				</View>
+			);
+		}
+
 		return (
 			<View style={styles.viewStyle}>
 				<FlatList
@@ -96,6 +113,11 @@ const styles = {
 		marginTop: 10,
 		marginBottom: 10,
 		textAlign: 'center'
+	},
+	spinner: {
+		flex: 1,
+		justifyContent: 'center',
+		alignSelf: 'center'
 	}
 }
 

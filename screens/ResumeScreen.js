@@ -71,7 +71,7 @@ class ResumeScreen extends Component {
 				if (riddle.id == this.props.currentRiddle) {
 					_.map(riddle, (part) => {
 						if (part.id == this.props.currentStep) {
-							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 300) {
+							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 20) {
 								if ((parseInt(this.props.currentStep) + 1) <= riddle.parts) {
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
 								} else {
