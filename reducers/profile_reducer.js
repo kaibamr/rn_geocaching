@@ -1,12 +1,15 @@
 import {
 	GET_PROFILE_START,
 	GET_PROFILE_COMPLETED,
-	GET_PROFILE_LOADED
+    GET_PROFILE_LOADED,
+    USER_LOGOUT_FAIL,
+    USER_LOGOUT_SUCCESS
 } from '../actions/types';
 
 const default_state = {
 	profile: null,
-	loading: false
+    loading: false,
+    logout: false
 }
 
 export default function(state = default_state, action) {
@@ -23,7 +26,12 @@ export default function(state = default_state, action) {
 			return {
 				...state,
 				loading: false
-			}
+            }
+        case USER_LOGOUT_SUCCESS:
+            return {
+                ...state,
+                logout: true
+            }
 		default:
 			return state;
 	}

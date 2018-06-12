@@ -5,12 +5,19 @@ import { getNews } from '../actions/news_actions';
 import { Card } from 'react-native-elements';
 import _ from 'lodash';
 
+import { AsyncStorage } from 'react-native';
+
 class NewsScreen extends Component {
 	state = {
 		loading: true
 	}
 
 	componentWillMount() {
+		//TODO DELETE DAT SIEET
+		// AsyncStorage.setItem('user_login', 'wojtek229@o2.pl');
+		// AsyncStorage.setItem('user_password', 'wojtek229');
+		///
+
 		this.props.getNews();
 		setTimeout(() => {
 			this.setState({

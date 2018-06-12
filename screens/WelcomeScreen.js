@@ -18,8 +18,10 @@ class WelcomeScreen extends Component {
 	}
 
 	async componentWillMount() {
-		const email = await AsyncStorage.getItem('user_login');
-		const password = await AsyncStorage.getItem('user_password');
+		//const email = await AsyncStorage.getItem('user_login');
+		//const password = await AsyncStorage.getItem('user_password');
+		const email = "wojtek229@o2.pl";
+		const password = "wojtek229";
 
 		if (email && password) {
 			this.props.loginUser(email, password);

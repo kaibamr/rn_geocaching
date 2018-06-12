@@ -7,6 +7,9 @@ export const LOADING_COMPLETE = 'login_complete';
 export const REGISTER_USER_FAIL = 'register_user_fail';
 export const AUTO_LOGIN_USER_FAIL = 'auto_login_user_fail';
 
+export const USER_LOGOUT_FAIL = 'user_logout_fail';
+export const USER_LOGOUT_SUCCESS = 'user_logout_success';
+
 //news actions
 export const GET_NEWS_START = 'get_news_start';
 export const GET_NEWS_COMPLETED = 'get_news_completed';

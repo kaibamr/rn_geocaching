@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, ActivityIndicator, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { getProfile } from '../actions/profile_actions';
+import { getProfile, logoutUser } from '../actions/profile_actions';
 import { Card, Button } from 'react-native-elements';
 import _ from 'lodash';
 
@@ -19,6 +19,20 @@ class ProfileScreen extends Component {
 				loading: this.props.loading
 			});
 		}, 1500);
+    }
+    
+    componentWillUpdate() {
+		this.logOutUser();
+	}
+
+	logOutUser() {
+		if (this.props.logout) {
+			this.props.navigation.navigate('Login');
+		}
+    }
+    
+    onLogoutPress() {
+		this.props.logoutUser();
 	}
 
 	render() {
@@ -38,7 +52,7 @@ class ProfileScreen extends Component {
                     </View>
                     <Text style={styles.nickname}>{this.props.profile.nickname}</Text>
                     <Text style={styles.points}>Total Points: {this.props.profile.totalPoints}</Text>
-                    <Button title="Log Out" buttonStyle={{marginTop: 15}}></Button>
+                    {/* <Button title="Log Out" buttonStyle={{marginTop: 15}} onPress={() => this.onLogoutPress()}></Button> */}
                 </View>
 			</View>
 		);
@@ -84,8 +98,9 @@ const styles = {
 function mapStateToProps({ profile }) {
 	return {
 		loading: profile.loading,
-		profile: profile.profile
+        profile: profile.profile,
+        logout: profile.logout
 	};
 }
 
-export default connect(mapStateToProps, { getProfile })(ProfileScreen);
+export default connect(mapStateToProps, { getProfile, logoutUser })(ProfileScreen);
