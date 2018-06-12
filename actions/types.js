@@ -27,3 +27,6 @@ export const GET_CURRENT_STEP = 'get_current_step';
 export const GET_PROFILE_START = 'get_profile';
 export const GET_PROFILE_COMPLETED = 'get_profile_completed';
 export const GET_PROFILE_LOADED = 'get_profile_loaded';
+
+//geo actions
+export const SET_POSITION = 'set_position';
