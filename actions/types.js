@@ -22,6 +22,7 @@ export const GET_RIDDLES_SUCCESS = 'get_riddles_success';
 export const SET_CURRENT_RIDDLE = 'set_current_riddle';
 export const GET_COMPLETED = 'get_completed';
 export const GET_CURRENT_STEP = 'get_current_step';
+export const ERROR_RIDDLE = 'error_riddle';
 
 //profiles actions
 export const GET_PROFILE_START = 'get_profile';

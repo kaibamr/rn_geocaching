@@ -4,7 +4,8 @@ import {
     GET_RIDDLES,
     GET_CURRENT_RIDDLE,
     SET_CURRENT_RIDDLE,
-    GET_CURRENT_STEP
+    GET_CURRENT_STEP,
+	  ERROR_RIDDLE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -12,7 +13,8 @@ const INITIAL_STATE = {
     currentRiddle: null,
     currentStep: null,
     completedRiddles: null,
-    loading: true
+    loading: true,
+    error: null
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -27,6 +29,8 @@ export default function (state = INITIAL_STATE, action) {
             return { ...state, loading: false };
         case GET_COMPLETED:
             return { ...state, completedRiddles: action.payload };
+      case ERROR_RIDDLE:
+            return { ...state, error: 'Some error occured'}
         default:
             return state;
     }     

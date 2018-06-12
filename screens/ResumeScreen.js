@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, CardSection, Alert, ActivityIndicator } from 'react-native';
+import { Card, Icon } from 'react-native-elements';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Constants, MapView, Location, Permissions } from 'expo';
@@ -70,13 +71,13 @@ class ResumeScreen extends Component {
 				if (riddle.id == this.props.currentRiddle) {
 					_.map(riddle, (part) => {
 						if (part.id == this.props.currentStep) {
-							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 20) {
+							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 300) {
 								if ((parseInt(this.props.currentStep) + 1) <= riddle.parts) {
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
 								} else {
 									this.props.setCompleted(riddle.id);
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
-									this.props.setCurrentRiddle(0);
+									this.props.setCurrentRiddle(-1);
 									Alert.alert(
 										'Congratulations',
 										'You have finished riddle',
@@ -135,10 +136,8 @@ class ResumeScreen extends Component {
 							return (
 								<View key={riddle.id}>
 									<View>
-										<Text>
-											Current Riddle: { riddle.description }
-										</Text>
-										<View>
+										<Card title='Current riddle'>
+											<Text>{riddle.description}</Text>
 											{_.map(riddle,(part) => {
 												if (part.description && part.id < this.props.currentStep) {
 													return (
@@ -148,19 +147,19 @@ class ResumeScreen extends Component {
 													);
 												}
 											})}
-											<Text>Actual step: </Text>
+											{/*<Text>Actual step: </Text>*/}
 											{_.map(riddle,(part) => {
 												if (part.description && part.info && part.id == this.props.currentStep) {
 													return (
 														<View key={part.id}>
 															<Text>
-																Tip: { part.info }
+																Tip - {part.info}
 															</Text>
 														</View>
 													);
 												}
 											})}
-										</View>
+										</Card>
 									</View>
 								</View>
 							);
