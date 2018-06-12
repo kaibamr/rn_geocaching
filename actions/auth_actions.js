@@ -91,20 +91,19 @@ const registerUserSuccess = (dispatch, user, email, password) => {
 		type: FIREBASE_LOGIN_SUCCESS,
 		payload: {
 			email,
-			password,
-			uid: currentUser.uid
+			password
 		}
 	});
 }
 
 const loginUserSuccess = (dispatch, user, email, password) => {
 	const { currentUser } = firebase.auth();
+	console.log('login user weszlo v2');
 	dispatch({
 		type: FIREBASE_LOGIN_SUCCESS,
 		payload: {
 			email,
-			password,
-			uid: currentUser.uid
+			password
 		}
 	});
 }

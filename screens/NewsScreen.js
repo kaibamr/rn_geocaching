@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, ActivityIndicator } from 'react-native';
+import { Text, View, ActivityIndicator, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { getNews } from '../actions/news_actions';
-import { Card } from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
 import _ from 'lodash';
 
 class NewsScreen extends Component {
@@ -44,6 +44,11 @@ class NewsScreen extends Component {
 		return (
 			<View style={styles.container}>
 				{this.renderNews()}
+				<Button title='elo' onPress={ async() => {
+					await AsyncStorage.setItem('user_login', undefined);
+					await AsyncStorage.setItem('user_password', undefined);
+					console.log('weszlo');
+				}} />
 			</View>
 		);
 	}

@@ -10,8 +10,8 @@ import {
 
 const default_state = {
 	loading: false,
-	email: 'wojtek229@o2.pl',
-	password: 'wojtek229',
+	email: null,
+	password: null,
 	error: null,
 	loggedIn: false,
 	uid: null,
@@ -28,8 +28,7 @@ export default function(state = default_state, action) {
 			return {
 				email: action.payload.email,
 				password: action.payload.password,
-				loggedIn: true,
-				uid: action.payload.uid
+				loggedIn: true
 			};
 		case LOADING_START:
 			return {

@@ -19,3 +19,6 @@ export const GET_RIDDLES_SUCCESS = 'get_riddles_success';
 export const SET_CURRENT_RIDDLE = 'set_current_riddle';
 export const GET_COMPLETED = 'get_completed';
 export const GET_CURRENT_STEP = 'get_current_step';
+
+//geo actions
+export const SET_POSITION = 'set_position';
