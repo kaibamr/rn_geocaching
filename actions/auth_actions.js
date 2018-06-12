@@ -27,13 +27,17 @@ export const passwordChanged = (value) => {
 
 export const loginUser = ({ email, password }) => {
 	return (dispatch) => {
+		const properEmail = String(email).replace(/ /g,'');
+		const properPassword = String(password).replace(/ /g,'');
+		console.log(properEmail);
+		console.log(properPassword);
 		try {
 			dispatch({ type: LOADING_START });
-			firebase.auth().signInWithEmailAndPassword(email, password)
+			firebase.auth().signInWithEmailAndPassword(properEmail, properPassword)
 				.then((user) => {
-					AsyncStorage.setItem('user_login', email);
-					AsyncStorage.setItem('user_password', password);
-					loginUserSuccess(dispatch, user, email, password);
+					AsyncStorage.setItem('user_login', properEmail);
+					AsyncStorage.setItem('user_password', properPassword);
+					loginUserSuccess(dispatch, user, properEmail, properPassword);
 				}).catch((error) => {
 					loginUserFail(dispatch);
 				});
@@ -45,18 +49,20 @@ export const loginUser = ({ email, password }) => {
 
 export const registerUser = ({ email, password })  => {
 	return (dispatch) => {
+		const properEmail = String(email).replace(/ /g,'');
+		const properPassword = String(password).replace(/ /g,'');
 		try {
-			if (password.length < 6) {
+			if (properPassword.length < 6) {
 				registerUserFail(dispatch, 'Password must be longer than 6 characters');
 				return;
 			}
 			dispatch({ type: LOADING_START });
-			firebase.auth().createUserWithEmailAndPassword(email, password)
+			firebase.auth().createUserWithEmailAndPassword(properEmail, properPassword)
 				.then((user) => {
 					if(user) {
-						AsyncStorage.setItem('user_login', email);
-						AsyncStorage.setItem('user_password', password);
-						registerUserSuccess(dispatch, user, email, password);
+						AsyncStorage.setItem('user_login', properEmail);
+						AsyncStorage.setItem('user_password', properPassword);
+						registerUserSuccess(dispatch, user, properEmail, properPassword);
 					}
 				}).catch((error) => {
 					registerUserFail(dispatch);
