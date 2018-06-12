@@ -113,6 +113,31 @@ class ResumeScreen extends Component {
 			);
 		}
 
+		if (this.props.currentRiddle === -1) {
+			return (
+				<View style={styles.container}>
+					{
+						this.state.locationResult === null ?
+							<Text>Finding your current location...</Text> :
+							this.state.hasLocationPermissions === false ?
+								<Text>Location permissions are not granted.</Text> :
+								this.state.mapRegion === null ?
+									<Text>Map region doesn't exist.</Text> :
+									<MapView
+										style={{alignSelf: 'stretch', height: 400}}
+										region={this.state.mapRegion}
+										onRegionChange={this._handleMapRegionChange}
+										showsMyLocationButton={true}
+										showsUserLocation={true}
+									/>
+					}
+				<Card title='Current riddle'>
+					<Text>You have to choose riddle!</Text>
+				</Card>
+				</View>
+			);
+		}
+
 		return (
 			<View style={styles.container}>
 				{
