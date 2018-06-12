@@ -10,6 +10,7 @@ import AchievementsScreen from './screens/AchievementsScreen';
 import RiddlesScreen from './screens/RiddlesScreen';
 import ResumeScreen from './screens/ResumeScreen';
 import NewsScreen from './screens/NewsScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 
@@ -64,8 +65,9 @@ export default class App extends React.Component {
 				screen: createBottomTabNavigator({
 					Resume: { screen: ResumeScreen },					
 					Riddles: { screen: RiddlesScreen },
-					Achievements: { screen: AchievementsScreen },
+					// Achievements: { screen: AchievementsScreen },
 					News: { screen: NewsScreen },
+					Profile: { screen: ProfileScreen }
 				}, {
 					navigationOptions: ({navigation}) => ({
 						tabBarIcon: ({ focused, tintColor }) => {
@@ -79,6 +81,8 @@ export default class App extends React.Component {
 								iconName = `ios-trophy${focused ? '' : '-outline'}`;
 							} else if (routeName === 'Riddles') {
 								iconName = `ios-bookmarks${focused ? '' : '-outline'}`;
+							} else if (routeName === 'Profile') {
+								iconName = `ios-person${focused ? '' : '-outline'}`;
 							}
 			
 							// You can return any component that you like here! We usually use an
