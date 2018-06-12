@@ -125,10 +125,12 @@ class ResumeScreen extends Component {
 									<Text>Map region doesn't exist.</Text> :
 									<MapView
 										style={{alignSelf: 'stretch', height: 400}}
-										region={this.state.mapRegion}
+										initialRegion={this.state.mapRegion}
 										onRegionChange={this._handleMapRegionChange}
 										showsMyLocationButton={true}
 										showsUserLocation={true}
+										loadingEnabled={true}
+										showsCompass={true}
 									/>
 					}
 				<Card title='Current riddle'>
