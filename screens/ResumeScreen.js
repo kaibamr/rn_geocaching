@@ -54,12 +54,38 @@ class ResumeScreen extends Component {
 				latitude: location.coords.latitude,
 				longitude: location.coords.longitude
 			});
-			console.log('latitude ', this.props.latitude);
-			console.log('longitude ', this.props.longitude);
-			console.log('Dystans: ', (this.distance(this.props.latitude, this.props.longitude, 50.289557, 18.680221) * 1000));
+			// console.log('latitude ', this.props.latitude);
+			// console.log('longitude ', this.props.longitude);
+			// console.log('Dystans: ', (this.distance(this.props.latitude, this.props.longitude, 50.289557, 18.680221) * 1000));
+			this.isInRadius();
 		});
-		console.log(this.props.riddlesMapped);
+		// console.log(this.props.riddlesMapped);
 	};
+
+	isInRadius() {
+		if (this.props.riddlesMapped && this.props.riddlesMapped.length > 0 && this.props.currentStep != null && this.props.latitude != 0 && this.props.longitude != 0) {
+			_.map(this.props.riddlesMapped,(riddle) => {
+				if (riddle.id == this.props.currentRiddle) {
+					_.map(riddle, (part) => {
+						if (part.id == this.props.currentStep) {
+							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 300) {
+								console.log('jesteś kurwa na miejscu');
+								if ((parseInt(this.props.currentStep) + 1) <= riddle.parts) {
+									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
+								} else {
+									console.log("Zagadka skonczona!");
+									this.props.setCompleted(riddle.id);
+									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
+								}
+							} else {
+								console.log('nie ma cie kurwa na miejscu');
+							}
+						}
+					});
+				}
+			});
+		}
+	}
 
 	distance(lat1, lon1, lat2, lon2) {
 		const p = 0.017453292519943295;    // Math.PI / 180
@@ -67,8 +93,8 @@ class ResumeScreen extends Component {
 		const a = 0.5 - c((lat2 - lat1) * p) / 2 +
 			c(lat1 * p) * c(lat2 * p) *
 			(1 - c((lon2 - lon1) * p)) / 2;
-
-		return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+		console.log('odleglosc ',  12742 * Math.asin(Math.sqrt(a)) * 1000);
+		return (12742 * Math.asin(Math.sqrt(a))) * 1000; // 2 * R; R = 6371 km
 	}
 
 	renderRiddleInfo() {
@@ -85,23 +111,62 @@ class ResumeScreen extends Component {
 
 	render() {
 		return (
-				<View style={styles.container}>
-					{
-						this.state.locationResult === null ?
-							<Text>Finding your current location...</Text> :
-							this.state.hasLocationPermissions === false ?
-								<Text>Location permissions are not granted.</Text> :
-								this.state.mapRegion === null ?
-									<Text>Map region doesn't exist.</Text> :
-									<MapView
-										style={{alignSelf: 'stretch', height: 400}}
-										region={this.state.mapRegion}
-										onRegionChange={this._handleMapRegionChange}
-										showsMyLocationButton={true}
-										showsUserLocation={true}
-									/>
+			<View style={styles.container}>
+				{
+					this.state.locationResult === null ?
+						<Text>Finding your current location...</Text> :
+						this.state.hasLocationPermissions === false ?
+							<Text>Location permissions are not granted.</Text> :
+							this.state.mapRegion === null ?
+								<Text>Map region doesn't exist.</Text> :
+								<MapView
+									style={{alignSelf: 'stretch', height: 400}}
+									region={this.state.mapRegion}
+									onRegionChange={this._handleMapRegionChange}
+									showsMyLocationButton={true}
+									showsUserLocation={true}
+								/>
+				}
+				<View>
+					{this.props.riddlesMapped && this.props.riddlesMapped.length !== 0 ? this.props.riddlesMapped.map((riddle) => {
+						if (this.props.currentRiddle == riddle.id) {
+							return (
+								<View key={riddle.id}>
+									<View>
+										<Text>
+											Current Riddle: { riddle.description }
+										</Text>
+										<View>
+											{_.map(riddle,(part) => {
+												if (part.description && part.id < this.props.currentStep) {
+													return (
+														<Text key={part.id}>
+															- { part.description } (completed)
+														</Text>
+													);
+												}
+											})}
+											<Text>Actual step: </Text>
+											{_.map(riddle,(part) => {
+												if (part.description && part.info && part.id == this.props.currentStep) {
+													return (
+														<View key={part.id}>
+															<Text>
+																Tip: { part.info }
+															</Text>
+														</View>
+													);
+												}
+											})}
+										</View>
+									</View>
+								</View>
+							);
+						}
+					}) : null // spinner
 					}
 				</View>
+			</View>
 		);
 	}
 }

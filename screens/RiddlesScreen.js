@@ -41,7 +41,7 @@ class RiddlesScreen extends Component {
 	getStep(item) {
         if (this.props.completed && this.props.completed.length > 0) {
             let completed = this.props.completed.split(",");
-            console.log(completed);
+            // console.log(completed);
             
             if (_.includes(completed, item.id.toString())) {
                 return <Text style={styles.completedText}> Completed!</Text>
