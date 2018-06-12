@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, CardSection, Alert  } from 'react-native';
+import { Text, View, StyleSheet, CardSection, Alert, ActivityIndicator } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Constants, MapView, Location, Permissions } from 'expo';
@@ -17,12 +17,18 @@ class ResumeScreen extends Component {
 		},
 		hasLocationPermissions: false,
 		locationResult: null,
-		firstRender: false
+		firstRender: false,
+		loading: true
 	};
 
 	componentDidMount() {
 		this._getLocationAsync();
 		this.props.riddlesFetch();
+		setTimeout(() => {
+			this.setState({
+				loading: this.props.loading
+			});
+		}, 2500);
 	}
 
 
@@ -64,7 +70,7 @@ class ResumeScreen extends Component {
 				if (riddle.id == this.props.currentRiddle) {
 					_.map(riddle, (part) => {
 						if (part.id == this.props.currentStep) {
-							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 300) {
+							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 20) {
 								if ((parseInt(this.props.currentStep) + 1) <= riddle.parts) {
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
 								} else {
@@ -98,6 +104,14 @@ class ResumeScreen extends Component {
 	}
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<View style={styles.spinner}>
+					<ActivityIndicator size="large" color="#0288D1"/>
+				</View>
+			);
+		}
+
 		return (
 			<View style={styles.container}>
 				{
@@ -168,6 +182,11 @@ const styles = {
 		backgroundColor: '#ecf0f1',
 	},
 	riddleInfo: {
+	},
+	spinner: {
+		flex: 1,
+		justifyContent: 'center',
+		alignSelf: 'center'
 	}
 };
 
