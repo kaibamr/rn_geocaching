@@ -22,7 +22,6 @@ class ResumeScreen extends Component {
 	}
 
 	_handleMapRegionChange = mapRegion => {
-		console.log(mapRegion);
 		this.setState({ mapRegion });
 	};
 
@@ -43,18 +42,27 @@ class ResumeScreen extends Component {
 				latitude: location.coords.latitude,
 				longitude: location.coords.longitude
 			});
+			console.log('latitude ', this.props.latitude);
+			console.log('longitude ', this.props.longitude);
+			console.log('Dystans: ', (this.distance(this.props.latitude, this.props.longitude, 50.289557, 18.680221) * 1000));
 		});
 	};
 
-	handlePositionChange() {
-		this.setState({ locationResult: location });
+	distance(lat1, lon1, lat2, lon2) {
+		const p = 0.017453292519943295;    // Math.PI / 180
+		const c = Math.cos;
+		const a = 0.5 - c((lat2 - lat1) * p)/2 +
+			c(lat1 * p) * c(lat2 * p) *
+			(1 - c((lon2 - lon1) * p))/2;
+
+		return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.paragraph}>
-					Pan, zoom, and tap on the map!
+					info
 				</Text>
 
 				{
@@ -72,10 +80,6 @@ class ResumeScreen extends Component {
 									showsUserLocation={true}
 								/>
 				}
-
-				<Text>
-					Location: {this.state.locationResult}
-				</Text>
 			</View>
 
 		);
