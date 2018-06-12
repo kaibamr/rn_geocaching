@@ -44,10 +44,6 @@ class NewsScreen extends Component {
 		return (
 			<View style={styles.container}>
 				{this.renderNews()}
-				<Button title='elo' onPress={ async() => {
-					await AsyncStorage.setItem('user_login', undefined);
-					await AsyncStorage.setItem('user_password', undefined);
-				}} />
 			</View>
 		);
 	}

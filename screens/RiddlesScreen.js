@@ -31,11 +31,19 @@ class RiddlesScreen extends Component {
     );
 
 	getActive(item) {
-		if (this.props.currentRiddle == item.id) {
-			return <Button title="Active" buttonStyle={{backgroundColor: "#007c0c"}}></Button>;
-		} else {
-			return <Button onPress={()=>{ this.props.setCurrentRiddle(item.id) }} title="Select"></Button>;
-		}
+        if (this.props.completedRiddles && this.props.completedRiddles.length > 0) {
+            let completedRiddles = this.props.completedRiddles.split(",");
+
+            if (_.includes(completedRiddles, item.id.toString())) {
+                return <Button title="Completed!" buttonStyle={{backgroundColor: "#007c0c"}}></Button>;
+            } else {
+                if (this.props.currentRiddle == item.id) {
+                    return <Button title="Active" buttonStyle={{backgroundColor: "#db3232"}}></Button>;
+                } else {
+                    return <Button onPress={()=>{ this.props.setCurrentRiddle(item.id) }} title="Select"></Button>;
+                }
+            }
+        }
     }
 	
 	getStep(item) {
@@ -43,7 +51,8 @@ class RiddlesScreen extends Component {
             let completedRiddles = this.props.completedRiddles.split(",");
             
             if (_.includes(completedRiddles, item.id.toString())) {
-                return <Text style={styles.completedText}> Completed!</Text>
+                //return <Text style={styles.completedText}> Completed!</Text>
+                return <Text style={styles.completedText}> { item.parts }/{ item.parts } </Text>
             }
             else if (this.props.currentRiddle == item.id) {
                 return <Text> { parseInt(this.props.currentStep) - 1 }/{ item.parts }</Text>
