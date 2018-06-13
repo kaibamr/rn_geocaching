@@ -26,7 +26,7 @@ class LoginScreen extends Component {
 
 	onAuthComplete(props) {
 		if (props.email && props.password && props.loggedIn) {
-			this.props.navigation.navigate('News');
+			this.props.navigation.navigate('Newsy');
 		}
 	}
 
@@ -69,7 +69,7 @@ class LoginScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Card title="Login to your account">
+				<Card title="Zaloguj się">
 					<View>
 						<Input
 							placeholder='Email'
@@ -78,7 +78,7 @@ class LoginScreen extends Component {
 							onChangeText={this.onEmailChange.bind(this)}
 						/>
 						<Input
-							placeholder='Password'
+							placeholder='Hasło'
 							leftIcon={{ type: 'font-awesome', name: 'unlock' }}
 							value={this.props.password}
 							onChangeText={this.onPasswordChange.bind(this)}

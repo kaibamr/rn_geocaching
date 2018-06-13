@@ -33,7 +33,7 @@ class WelcomeScreen extends Component {
 				password,
 				loading: this.props.loading
 			});
-			this.props.navigation.navigate('News');
+			this.props.navigation.navigate('Newsy');
 		} else {
 			this.setState({
 				email: null,

@@ -51,7 +51,7 @@ class ProfileScreen extends Component {
                         <Image source={require('../assets/profile.png')} style={{width: 125, height: 140}} />
                     </View>
                     <Text style={styles.nickname}>{this.props.profile.nickname}</Text>
-                    <Text style={styles.points}>Total Points: {this.props.profile.totalPoints}</Text>
+                    <Text style={styles.points}>Liczba punktów: {this.props.profile.totalPoints}</Text>
                     {/* <Button title="Log Out" buttonStyle={{marginTop: 15}} onPress={() => this.onLogoutPress()}></Button> */}
                 </View>
 			</View>

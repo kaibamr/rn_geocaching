@@ -44,12 +44,12 @@ class RiddlesScreen extends Component {
             let completedRiddles = this.props.completedRiddles.split(",");
 
             if (_.includes(completedRiddles, item.id.toString())) {
-                return <Button title="Completed!" buttonStyle={{backgroundColor: "#007c0c"}}></Button>;
+                return <Button title="Ukończone!" buttonStyle={{backgroundColor: "#007c0c"}}></Button>;
             } else {
                 if (this.props.currentRiddle == item.id) {
-                    return <Button title="Active" buttonStyle={{backgroundColor: "#db3232"}}></Button>;
+                    return <Button title="Aktywne" buttonStyle={{backgroundColor: "#db3232"}}></Button>;
                 } else {
-                    return <Button onPress={()=>{ this.props.setCurrentRiddle(item.id) }} title="Select"></Button>;
+                    return <Button onPress={()=>{ this.props.setCurrentRiddle(item.id) }} title="Wybierz"></Button>;
                 }
             }
         }
@@ -93,7 +93,7 @@ class RiddlesScreen extends Component {
 						return (
 						<Card title={item.description} key={item.id}>
 							<Image source={{uri: item.thumbnailUrl}} style={{width: 300, height: 200}} />
-							<Text style={styles.stepText}> Finished steps: {this.getStep(item)} </Text>
+							<Text style={styles.stepText}>Ukończone kroki: {this.getStep(item)} </Text>
 							{this.getActive(item)}
 						</Card>
 						);

@@ -71,7 +71,7 @@ class ResumeScreen extends Component {
 				if (riddle.id == this.props.currentRiddle) {
 					_.map(riddle, (part) => {
 						if (part.id == this.props.currentStep) {
-							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 20) {
+							if (this.distance(this.props.latitude, this.props.longitude, part.latitude, part.longitude) < 150) {
 								if ((parseInt(this.props.currentStep) + 1) <= riddle.parts) {
 									this.props.setCurrentStep((parseInt(this.props.currentStep) + 1));
 								} else {
@@ -118,9 +118,9 @@ class ResumeScreen extends Component {
 				<View style={styles.container}>
 					{
 						this.state.locationResult === null ?
-							<Text>Finding your current location...</Text> :
+							<Text>Szukanie Twojej lokalizacji...</Text> :
 							this.state.hasLocationPermissions === false ?
-								<Text>Location permissions are not granted.</Text> :
+								<Text>Brak uprawnień do lokalizacji.</Text> :
 								this.state.mapRegion === null ?
 									<Text>Map region doesn't exist.</Text> :
 									<MapView
@@ -130,8 +130,8 @@ class ResumeScreen extends Component {
 										showsUserLocation={true}
 									/>
 					}
-				<Card title='Current riddle'>
-					<Text>You have to choose riddle!</Text>
+				<Card title='Aktywna zagadka'>
+					<Text>Musisz wybrać zagadkę!</Text>
 				</Card>
 				</View>
 			);
@@ -141,11 +141,11 @@ class ResumeScreen extends Component {
 			<View style={styles.container}>
 				{
 					this.state.locationResult === null ?
-						<Text>Finding your current location...</Text> :
+						<Text>Szukanie Twojej lokalizacji...</Text> :
 						this.state.hasLocationPermissions === false ?
-							<Text>Location permissions are not granted.</Text> :
+							<Text>Brak uprawnień do lokalizacji.</Text> :
 							this.state.mapRegion === null ?
-								<Text>Map region doesn't exist.</Text> :
+								<Text>Ten region nie istnieje.</Text> :
 								<MapView
 									style={{alignSelf: 'stretch', height: 400}}
 									initialRegion={this.state.mapRegion}
@@ -160,7 +160,7 @@ class ResumeScreen extends Component {
 							return (
 								<View key={riddle.id}>
 									<View>
-										<Card title='Current riddle'>
+										<Card title='Aktywna zagadka'>
 											<Text>{riddle.description}</Text>
 											{_.map(riddle,(part) => {
 												if (part.description && part.id < this.props.currentStep) {
@@ -177,7 +177,7 @@ class ResumeScreen extends Component {
 													return (
 														<View key={part.id}>
 															<Text>
-																Tip - {part.info}
+																Podpowiedź - {part.info}
 															</Text>
 														</View>
 													);

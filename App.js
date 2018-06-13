@@ -44,17 +44,17 @@ export default class App extends React.Component {
 		const MainNavigator = createBottomTabNavigator({
 			welcome: { screen: WelcomeScreen },
 			auth: createBottomTabNavigator({
-				Register: { screen: RegisterScreen },
-				Login: { screen: LoginScreen }
+				Zarejestruj: { screen: RegisterScreen },
+				Zaloguj: { screen: LoginScreen }
 			}, {
 				navigationOptions: ({navigation}) => ({
 					tabBarIcon: ({ focused, tintColor }) => {
 						const { routeName } = navigation.state;
 						let iconName;
 
-						if (routeName === "Register") {
+						if (routeName === "Zarejestruj") {
 							iconName = `ios-person-add${focused ? '' : '-outline'}`;
-						} else if (routeName === "Login") {
+						} else if (routeName === "Zaloguj") {
 							iconName = `ios-person${focused ? '' : '-outline'}`;
 						}
 						return <Ionicons name={iconName} size={25} color={tintColor} />;
@@ -63,25 +63,25 @@ export default class App extends React.Component {
 			}),
 			main: {
 				screen: createBottomTabNavigator({
-					Resume: { screen: ResumeScreen },					
-					Riddles: { screen: RiddlesScreen },
+					Kontynuuj: { screen: ResumeScreen },
+					Zagadki: { screen: RiddlesScreen },
 					// Achievements: { screen: AchievementsScreen },
-					News: { screen: NewsScreen },
-					Profile: { screen: ProfileScreen }
+					Newsy: { screen: NewsScreen },
+					Profil: { screen: ProfileScreen }
 				}, {
 					navigationOptions: ({navigation}) => ({
 						tabBarIcon: ({ focused, tintColor }) => {
 							const { routeName } = navigation.state;
 							let iconName;
-							if (routeName === 'News') {
+							if (routeName === 'Newsy') {
 								iconName = `ios-paper${focused ? '' : '-outline'}`;
-							} else if (routeName === 'Resume') {
+							} else if (routeName === 'Kontynuuj') {
 								iconName = `ios-compass${focused ? '' : '-outline'}`;
 							} else if (routeName === 'Achievements') {
 								iconName = `ios-trophy${focused ? '' : '-outline'}`;
-							} else if (routeName === 'Riddles') {
+							} else if (routeName === 'Zagadki') {
 								iconName = `ios-bookmarks${focused ? '' : '-outline'}`;
-							} else if (routeName === 'Profile') {
+							} else if (routeName === 'Profil') {
 								iconName = `ios-person${focused ? '' : '-outline'}`;
 							}
 			
