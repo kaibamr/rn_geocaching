@@ -53,8 +53,8 @@ class ResumeScreen extends Component {
 				mapRegion: {
 					latitude: location.coords.latitude,
 					longitude: location.coords.longitude,
-					latitudeDelta: 0.0922,
-					longitudeDelta: 0.0421
+					latitudeDelta: 0.01,
+					longitudeDelta: 0.01
 				}
 			});
 			this.props.setPosition({
@@ -127,10 +127,7 @@ class ResumeScreen extends Component {
 										style={{alignSelf: 'stretch', height: 400}}
 										initialRegion={this.state.mapRegion}
 										onRegionChange={this._handleMapRegionChange}
-										showsMyLocationButton={true}
 										showsUserLocation={true}
-										loadingEnabled={true}
-										showsCompass={true}
 									/>
 					}
 				<Card title='Current riddle'>
@@ -151,7 +148,7 @@ class ResumeScreen extends Component {
 								<Text>Map region doesn't exist.</Text> :
 								<MapView
 									style={{alignSelf: 'stretch', height: 400}}
-									region={this.state.mapRegion}
+									initialRegion={this.state.mapRegion}
 									onRegionChange={this._handleMapRegionChange}
 									showsMyLocationButton={true}
 									showsUserLocation={true}
