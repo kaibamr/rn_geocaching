@@ -47,7 +47,7 @@ class RegisterScreen extends Component {
 				<Button
 					iconLeft
 					leftIcon={{ type: 'font-awesome', name: 'map-marker' }}
-					title='Start new adventure!'
+					title='Rozpocznij przygodę!'
 					style={{
 						backgroundColor: '#0288D1',
 						borderRadius: 5

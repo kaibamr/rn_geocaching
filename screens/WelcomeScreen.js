@@ -5,9 +5,9 @@ import Slides from '../components/Slides';
 import { loginUser } from '../actions/auth_actions';
 
 const SLIDE_DATA = [
-	{ text: 'Welcome in GeocachingApp!', color: '#03A9F4' },
-	{ text: 'Want to explore? Just select riddle and go on!', color: '#670CE8' },
-	{ text: 'Create an account and you are ready to go!', color: '#03A9F4' }
+	{ text: 'Witaj w  GeocachingApp!', color: '#03A9F4' },
+	{ text: 'Chcesz przeżyć przygodę?', color: '#670CE8' },
+	{ text: 'Stwórz konto i startuj!', color: '#03A9F4' }
 ];
 
 class WelcomeScreen extends Component {

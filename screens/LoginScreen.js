@@ -47,7 +47,7 @@ class LoginScreen extends Component {
 				<Button
 					iconLeft
 					leftIcon={{ type: 'font-awesome', name: 'map-marker' }}
-					title='Login'
+					title='Zaloguj'
 					style={{
 						backgroundColor: '#0288D1',
 						borderRadius: 5
